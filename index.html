@@ -10,7 +10,7 @@
   --fs:.8125rem;
   --tariff-w:clamp(13.125rem,18vw,17.5rem);
 }
-html{font-size:12.8px}
+html{font-size:clamp(11.52px,.8466vw,24px)}
 @media (max-width:819px){html{font-size:16px}:root{--fs:.75rem}}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -89,12 +89,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .desktop-only{display:none !important}
   .mobile-only{display:flex}
   .stage{display:flex;flex-direction:column;align-items:center}
-  .stage .tariff-wrap{width:min(76%,330px);margin:0}
+  .stage .tariff-wrap{width:min(76%,20.625rem);margin:0}
   .stage .process{margin:clamp(44px,14vw,64px) 0}
   .tg-fixed{
     position:fixed;left:50%;transform:translateX(-50%);
     bottom:max(14px,env(safe-area-inset-bottom));
-    z-index:10;background:#000;min-width:136px;min-height:48px;
+    z-index:10;background:#000;min-width:8.5rem;min-height:3rem;
   }
   .foot{margin-top:56px}
 }
