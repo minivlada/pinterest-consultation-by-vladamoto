@@ -7,10 +7,11 @@
 <style>
 :root{
   --green:#2CEF1C;
-  --fs:13px;
-  --tariff-w:clamp(210px,18vw,280px);
+  --fs:.8125rem;
+  --tariff-w:clamp(13.125rem,18vw,17.5rem);
 }
-@media (max-width:819px){:root{--fs:12px}}
+html{font-size:12.8px}
+@media (max-width:819px){html{font-size:16px}:root{--fs:.75rem}}
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 html,body{margin:0;background:#000}
@@ -31,15 +32,15 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .screen{
   min-height:100vh;min-height:100svh;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:24px;text-align:center;
+  padding:1.5rem;text-align:center;
 }
 .welcome-text{margin:0 0 1.6em}
-.yes{padding:.5em 1.2em}
+.yes{padding:.6em 2.4em;border:1px solid var(--green);border-radius:0}
 .loader-col{display:flex;flex-direction:column;align-items:center}
 .pct{display:inline-block;width:4ch;text-align:left}
 .load-line{white-space:pre;text-align:left;width:16ch;min-height:1.7em}
 .spinner{
-  width:22px;height:22px;margin-top:1.6em;
+  width:1.375rem;height:1.375rem;margin-top:1.6em;
   border:2px solid var(--green);border-top-color:transparent;border-radius:50%;
   animation:spin .8s linear infinite;
 }
@@ -49,12 +50,12 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
 /* ---------- Main ---------- */
 .page{
-  max-width:1500px;margin:0 auto;
-  padding:24px clamp(20px,11vw,200px) 40px;
+  max-width:93.75rem;margin:0 auto;
+  padding:1.5rem clamp(1.25rem,11vw,12.5rem) 2.5rem;
   min-height:100vh;
 }
-.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;margin-bottom:clamp(40px,7vw,90px)}
-.back{justify-self:start;margin-left:calc(-1 * clamp(0px,7vw,120px));padding:.4em 0}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;margin-bottom:clamp(2.5rem,7vw,5.625rem)}
+.back{justify-self:start;margin-left:calc(-1 * clamp(0px,7vw,7.5rem));padding:.4em 0}
 .status{text-align:center;margin:0;grid-column:2}
 
 .tg{
@@ -68,14 +69,16 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .tariff{display:block;width:100%;height:auto}
 
 /* desktop */
-.stage{display:grid;grid-template-columns:var(--tariff-w) minmax(0,1fr) var(--tariff-w);column-gap:clamp(16px,3vw,48px);align-items:stretch}
+.stage{display:grid;grid-template-columns:var(--tariff-w) minmax(0,1fr) var(--tariff-w);column-gap:clamp(1rem,3vw,3rem);align-items:stretch}
 .stage .tariff-wrap{align-self:center;margin-block:3.5rem}
-.center{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:0 8px}
+.center{display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:0 .5rem}
 .mobile-only{display:none}
 .desktop-only{display:flex}
 
-.foot{margin-top:clamp(48px,7vw,90px);text-align:center;display:flex;flex-direction:column;gap:1em}
-.foot p{margin:0;letter-spacing:-0.1em}
+.foot{margin-top:clamp(3rem,7vw,5.625rem);text-align:center;display:flex;flex-direction:column;gap:0}
+.foot p{margin:0;line-height:1.35;letter-spacing:0}
+
+@media (min-width:1000px){.center .process p{white-space:nowrap}}
 
 /* mobile */
 @media (max-width:819px){
@@ -86,7 +89,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   .desktop-only{display:none !important}
   .mobile-only{display:flex}
   .stage{display:flex;flex-direction:column;align-items:center}
-  .stage .tariff-wrap{width:min(82%,360px);margin:0}
+  .stage .tariff-wrap{width:min(76%,330px);margin:0}
   .stage .process{margin:clamp(44px,14vw,64px) 0}
   .tg-fixed{
     position:fixed;left:50%;transform:translateX(-50%);
@@ -102,7 +105,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
 <!-- Приветствие -->
 <section id="welcome" class="screen">
-  <p class="welcome-text">&lt; ХОТИТЕ ПРИОБРЕСТИ КОНСУЛЬТАЦИЮ ? /&gt;</p>
+  <p class="welcome-text">&lt;&nbsp;ХОТИТЕ ПРИОБРЕСТИ КОНСУЛЬТАЦИЮ&nbsp;?&nbsp;/&gt;</p>
   <button id="yes" class="yes" type="button">ДА</button>
 </section>
 
@@ -111,7 +114,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <div class="loader-col">
     <div id="l1" class="line min-h"></div>
     <div id="l2" class="load-line"><span id="l2a"></span><span id="l2p" class="pct"></span></div>
-    <div id="l3" class="line min-h"></div>
+    <div id="l3" class="line min-h" hidden></div>
     <div id="spin" class="spinner hide-spinner" role="status" aria-label="Загрузка"></div>
   </div>
 </section>
@@ -121,7 +124,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
   <div class="page">
     <div class="top">
       <button id="back" class="back" type="button">&lt; назад</button>
-      <p class="status">&lt; ЗАПРОС_ПОЛУЧЕН /&gt; ... РАСЧЁТ_СТОИМОСТИ /&gt;</p>
+      <p class="status">&lt;&nbsp;ЗАПРОС_ПОЛУЧЕН&nbsp;/&gt; ... РАСЧЁТ_СТОИМОСТИ&nbsp;/&gt;</p>
     </div>
 
     <div class="stage">
@@ -160,13 +163,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
   var $ = function (id) { return document.getElementById(id); };
   var welcome = $('welcome'), loader = $('loader'), main = $('main');
-  var l1 = $('l1'), l2a = $('l2a'), l2p = $('l2p'), l3 = $('l3'), spin = $('spin');
+  var l1 = $('l1'), l2 = $('l2'), l2a = $('l2a'), l2p = $('l2p'), l3 = $('l3'), spin = $('spin');
 
-  var TEXT1 = '< ЗАПРОС_ПОЛУЧЕН /> ... РАСЧЁТ_СТОИМОСТИ />';
+  var TEXT1 = '<\u00a0ЗАПРОС_ПОЛУЧЕН\u00a0/> ... РАСЧЁТ_СТОИМОСТИ\u00a0/>';
   var TEXT2 = '... Loading ';
-  var TEXT3 = '... ГОТОВО! />';
+  var TEXT3 = '... ГОТОВО!\u00a0/>';
   var PERCENTS = [0,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100];
-  var TYPE_DELAY = 45, PCT_DELAY = 170, SPIN_TIME = 1800, PAUSE = 350;
+  var TYPE_DELAY = 20, PCT_DELAY = 70, SPIN_TIME = 1400, PAUSE = 150;
 
   /* ---- «Процесс работы» (один шаблон для всех копий) ---- */
   var PROCESS = [
@@ -185,8 +188,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     box.innerHTML = html;
     var ps = box.querySelectorAll('p');
     var i = box.hasAttribute('data-dots') ? 1 : 0;
-    ps[i].textContent = '< процесс работы >';
-    PROCESS.forEach(function (t, k) { ps[i + 1 + k].textContent = t; });
+    var glue = function (t) { return t.replace(/^< /, '<\u00a0').replace(/ >$/, '\u00a0>'); };
+    ps[i].textContent = glue('< процесс работы >');
+    PROCESS.forEach(function (t, k) { ps[i + 1 + k].textContent = glue(t); });
   });
 
   /* ---- Единый управляемый сценарий ---- */
@@ -234,6 +238,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
     l2a.textContent = '';
     l2p.textContent = '';
     l3.textContent = '';
+    l3.hidden = true;
+    l2.hidden = false;
     spin.classList.add('hide-spinner');
   }
 
@@ -270,7 +276,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
         return chain;
       })
       .then(function () { return sleep(PAUSE, id); })
-      .then(function () { return typeInto(l3, TEXT3, id); }) // этап 4
+      .then(function () {                                    // этап 4
+        l2.hidden = true;    // строка Loading полностью убирается,
+        l3.hidden = false;   // ГОТОВО появляется на её месте (l1 остаётся)
+        return typeInto(l3, TEXT3, id);
+      })
       .then(function () {                                    // этап 5
         spin.classList.remove('hide-spinner');
         return sleep(SPIN_TIME, id);
